@@ -1,5 +1,5 @@
 #Risk Adjuster Constructor
-riskAdjuster <- function(CCs = character(0), map = df)
+riskAdjuster <- function(CCs = character(0), map = df, scoreMap)
     {   
 		if (!is.data.frame(map)) stop("one2one needs to be a data frame")
         # Create the basic methods as part of a list to be returned.
@@ -8,7 +8,9 @@ riskAdjuster <- function(CCs = character(0), map = df)
         me = list(
 			CCs= CCs,
             # Define the one-to-one mapping from diagnosis to condition category
-            map = map
+            map = map,
+			# Define the score mapping
+			scoreMap = scoreMap
             )
 		structure(me, class = append(class(me), "riskAdjuster"))
         return(me)
@@ -23,4 +25,4 @@ cmsHCC
 class(cmsHCC) #verify risk adjuster
 
 #Test HHS-HCC
-hhsHCC <- riskAdjuster(unique(map$hcc), map)
+hhsHCC <- riskAdjuster(unique(map$hcc), map, scoreMap)

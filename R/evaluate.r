@@ -14,10 +14,9 @@ evaluate <- function(members, claims, riskAdjuster) {
 		ccInd <- match(riskAdjuster$map[dxInd,"hcc"], riskAdjuster$CCs)
 		ccVals[ccInd] <- TRUE
 		vals[mem,] <- ccVals
-		print(paste0("completed member:", mem))
 	}	
 	#Return a sorted list at the member level
-	return(vals)
+	return(vals %*% riskAdjuster$scoreMap$score)
 }
 
 test_members <- read.csv(text = "1\n2\n3", header = FALSE, colClasses = "character")
@@ -27,4 +26,5 @@ names(test_claims) <- c("id","icd9")
 cmsCCs <- evaluate(test_members, test_claims, cmsHCC)
 
 #hhs-HCC
-hhsCCs <- evaluate(members, claims, hhsHCC)
+system.time(riskScores <- evaluate(members, claims, hhsHCC))
+riskScores[riskScores != 0]
