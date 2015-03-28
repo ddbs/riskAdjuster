@@ -1,4 +1,4 @@
-# riskadjustment
+# riskAdjuster
 1. Alternative - Provides an out-of-the-box open source alternative to SAS
 2. Side-by-side Comparison - Compare the accuracy of different risk adjusters side-by-side
 3. Modeling - Modify standard risk adjusters to model the impact of rule changes
